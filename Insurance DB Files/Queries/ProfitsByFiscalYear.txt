@@ -1,0 +1,31 @@
+﻿SELECT sales.FinancialYear, Sales.Gross ,
+    CASE
+    WHEN Expenses.Expense IS NULL
+        THEN 0
+    ELSE ExpenseS.Expense
+    END as AmountSpentOnClaims ,
+    CASE
+    WHEN Sales.Gross - Expenses.Expense IS NULL
+        THEN Sales.Gross
+    ELSE Sales.Gross - Expenses.Expense
+    END as 'Profit/Loss (£)'  FROM
+    (
+        SELECT
+   CASE WHEN MONTH(policy.PolicyStartDate)>=4 THEN
+          concat(YEAR(policy.PolicyStartDate), ' to ',YEAR(policy.PolicyStartDate)+1)
+   ELSE concat(YEAR(policy.PolicyStartDate)-1,' to ', YEAR(policy.PolicyStartDate)) END AS FinancialYear,
+   SUM(policy.Price) as Gross
+FROM policy
+GROUP BY FinancialYear
+    ) AS Sales
+LEFT JOIN
+  (
+    SELECT
+   CASE WHEN MONTH(claim.DatePaid)>=4 THEN
+          concat(YEAR(claim.DatePaid), ' to ',YEAR(claim.DatePaid)+1)
+   ELSE concat(YEAR(claim.DatePaid)-1,' to ', YEAR(claim.DatePaid)) END AS FinancialYear,
+   SUM(claim.AmountPaidOut) as Expense
+  FROM claim
+  GROUP BY FinancialYear
+  HAVING FinancialYear is NOT NULL
+    ) as Expenses ON Expenses.FinancialYear = Sales.FinancialYear;

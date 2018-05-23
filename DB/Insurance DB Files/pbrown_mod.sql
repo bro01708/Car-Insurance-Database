@@ -1,0 +1,11 @@
+INSERT INTO pbrown.`mod` (ModName, Points) VALUES ('DrivingLights', 10);
+INSERT INTO pbrown.`mod` (ModName, Points) VALUES ('CosmeticExhaust', 10);
+INSERT INTO pbrown.`mod` (ModName, Points) VALUES ('PerformanceExhaust', 30);
+INSERT INTO pbrown.`mod` (ModName, Points) VALUES ('Remapped/AftermarketECU', 50);
+INSERT INTO pbrown.`mod` (ModName, Points) VALUES ('AftermarketAlloys', 10);
+INSERT INTO pbrown.`mod` (ModName, Points) VALUES ('NonStandardPaintwork', 10);
+INSERT INTO pbrown.`mod` (ModName, Points) VALUES ('SuspensionChanges', 15);
+INSERT INTO pbrown.`mod` (ModName, Points) VALUES ('Turbocharger', 50);
+INSERT INTO pbrown.`mod` (ModName, Points) VALUES ('Supercharger', 50);
+INSERT INTO pbrown.`mod` (ModName, Points) VALUES ('SoundSystem', 10);
+INSERT INTO pbrown.`mod` (ModName, Points) VALUES ('ModifiedBodywork', 20);

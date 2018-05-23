@@ -1,0 +1,4 @@
+SELECT Title , FName as 'First Name', LName as 'Last Name' , EmailAddress ,  customer.TelephoneNumber , DATE_FORMAT(CURDATE(), '%m/%d/%Y') as 'Todays Date',DATE_FORMAT(PolicyEndDate, '%m/%d/%Y') as 'Policy End Date' , DATEDIFF(PolicyEndDate, CURDATE())as 'Days Left', policy.ID  as "Policy ID" , VehicleReg
+FROM customer
+LEFT JOIN policy on customer.ID = policy.CustomerID
+WHERE PolicyEndDate BETWEEN CURDATE() AND DATE_ADD(NOW(), INTERVAL 30 DAY) ;

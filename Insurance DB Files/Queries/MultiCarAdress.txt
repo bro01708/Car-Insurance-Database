@@ -1,0 +1,13 @@
+SELECT CustomerID, Title, FName AS FirstName, LName as LastName , EmailAddress, TelephoneNumber , VehicleReg , HouseNumber , PostCode, Price as 'Price(£)'
+From customer
+LEFT JOIN policy ON customer.ID = policy.CustomerID
+LEFT JOIN address on customer.AddressID = address.ID
+WHERE CURDATE() BETWEEN PolicyStartDate AND  PolicyEndDate
+AND AddressID IN
+    (
+  SELECT customer.AddressID
+  FROM customer
+  GROUP BY AddressID
+  HAVING COUNT(AddressID) >1
+    )
+;

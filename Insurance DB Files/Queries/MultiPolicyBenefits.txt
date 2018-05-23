@@ -1,0 +1,12 @@
+SELECT x.pol1 as PolicyID, x.cus1 as CustomerID, x.pol2 PolicyID2, x.cus2 as CustomerID2
+FROM(
+    SELECT P1.ID as pol1, P1.CustomerID as cus1 , P1.PolicyStartDate,P1.PolicyEndDate, P2.CustomerID as cus2, P2.ID as pol2
+    FROM policy AS P1, policy AS P2
+    WHERE P1.ID < P2.ID
+    AND P1.PolicyStartDate BETWEEN P2.PolicyStartDate AND P2.PolicyEndDate
+    OR P1.PolicyEndDate BETWEEN P2.PolicyStartDate AND P2.PolicyEndDate
+)AS X
+WHERE pol1 <> pol2
+AND cus1 = cus2
+AND CURDATE() BETWEEN X.PolicyStartDate AND  X.PolicyEndDate
+;
